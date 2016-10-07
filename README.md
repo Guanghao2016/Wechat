@@ -1,3 +1,3 @@
-# wecaht-program
+# wechat-program
 
 ### using koa
