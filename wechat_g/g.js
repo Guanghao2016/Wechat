@@ -46,23 +46,11 @@ module.exports = function(opts) {
 
 			var message = util.formateMessage(content.xml)
 			
-			if (message.MsgType === 'text') {
-				var now = new Date().getTime()
+			this.weixin = message
 
-				this.status = 200
-				this.type = 'application/xml'
-				this.body = '<xml>'+
-				 '<ToUserName><![CDATA[' + message.FromUserName + ']]></ToUserName>'+
-				 '<FromUserName><![CDATA[' + message.ToUserName+ ']]></FromUserName>'+
-				 '<CreateTime>' + now + '</CreateTime>'+
-				 '<MsgType><![CDATA[text]]></MsgType>'+
-				 '<Content><![CDATA['+ '我能复制你的留言'+ message.Content +']]></Content>'+
-				 '<MsgId>1234567890123456</MsgId>'+
-				 '</xml>'
+			yield handler.call(this, next)
 
-				return
-			}
+			wechat.reply.call(this)
 		}
-		
 	}
 }
